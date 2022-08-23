@@ -1,8 +1,12 @@
 package com.BikkadIT.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +19,7 @@ public class ContactController {
 	@Autowired
 	private ContactService contactService;
 	
+	@PostMapping(value="/saveContact" , consumes = "application/json")
 	public ResponseEntity<String> saveContactDetails(@RequestBody Contact contact){
 		
 		boolean savedContact = this.contactService.saveContact(contact);
@@ -28,5 +33,17 @@ public class ContactController {
 			
 			return new ResponseEntity<String>(msg1 , HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping(value="/getAll")
+	public ResponseEntity<List<Contact>> getAllContact(){
+		
+		List<Contact> allContacts = this.contactService.getAll();
+		if(allContacts!=null) {
+			return new ResponseEntity<List<Contact>>(allContacts , HttpStatus.OK);
+		}else {
+			return new ResponseEntity("Data Not Fount" , HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 }

@@ -1,5 +1,7 @@
 package com.BikkadIT.ServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,12 @@ public class ContactServiceImpl implements ContactService{
 		
 		return false;
 		}
+	}
+
+	@Override
+	public List<Contact> getAll() {
+		
+		List<Contact> findAll = this.contactRepo.findAll();
+		return findAll;
 	}
 }
