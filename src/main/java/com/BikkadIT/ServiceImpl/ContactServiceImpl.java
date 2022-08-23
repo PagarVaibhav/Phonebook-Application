@@ -36,4 +36,13 @@ public class ContactServiceImpl implements ContactService{
 		List<Contact> findAll = this.contactRepo.findAll();
 		return findAll;
 	}
+
+	@Override
+	public Contact getById(Integer cId) {
+		
+		Contact findById = contactRepo.findById(cId).get();
+		
+		return findById;
+		
+	}
 }
