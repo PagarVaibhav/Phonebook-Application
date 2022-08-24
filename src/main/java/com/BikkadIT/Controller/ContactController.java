@@ -86,4 +86,18 @@ public class ContactController {
 			return new ResponseEntity<String>("Given Id Does Not Exist" , HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@DeleteMapping(value="/softDelete/{cId}")
+	public ResponseEntity<String> softDeletion(@PathVariable Integer cId){
+		
+		boolean softDeleteById = this.contactService.softDeleteById(cId);
+		
+		if(softDeleteById) {
+			String msg="Contact Deleted Successfully";
+			return new ResponseEntity<String>(msg , HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Given Id Does Not Exist" , HttpStatus.BAD_REQUEST);
+		}
+	}
 }

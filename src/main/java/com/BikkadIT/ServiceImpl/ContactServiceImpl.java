@@ -87,7 +87,17 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public boolean softDeleteById(Integer cId) {
-		// TODO Auto-generated method stub
+		
+		Optional<Contact> contact = this.contactRepo.findById(cId);
+		
+		if(contact.isPresent()) {
+			
+			Contact contact2 = contact.get();
+			contact2.setActiveSwitch('N');
+			this.contactRepo.save(contact2);
+			return true;
+		}
+		
 		return false;
 	}
 }
