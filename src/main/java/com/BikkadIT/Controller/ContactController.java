@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,4 +72,18 @@ public class ContactController {
 			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
 		}
 }
+	
+	@DeleteMapping(value="/delete/{cId}")
+	public ResponseEntity<String> hardDeletion(@PathVariable Integer cId){
+		
+		boolean hardDeleteById = this.contactService.hardDeleteById(cId);
+		
+		if(hardDeleteById) {
+			String msg="Contact Deleted Successfully";
+			return new ResponseEntity<String>(msg , HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Given Id Does Not Exist" , HttpStatus.BAD_REQUEST);
+		}
+	}
 }

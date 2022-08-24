@@ -13,4 +13,8 @@ public interface ContactService {
 	public Contact getById(Integer cId);
 	
 	public boolean updateContact(Contact contact);
+	
+	public boolean hardDeleteById(Integer cId);
+	
+	public boolean softDeleteById(Integer cId);
 }

@@ -1,6 +1,7 @@
 package com.BikkadIT.ServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,36 @@ public class ContactServiceImpl implements ContactService{
 		else {
 		return true;
 		}
+	}
+
+	@Override
+	public boolean hardDeleteById(Integer cId) {
+		
+//		boolean existedData = this.contactRepo.existsById(cId);
+//		
+//		if(existedData) {
+//			
+//			this.contactRepo.deleteById(cId);
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+		
+		
+		Optional<Contact> findById = this.contactRepo.findById(cId);
+		
+		if(findById.isPresent()) {
+			this.contactRepo.deleteById(cId);
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean softDeleteById(Integer cId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
