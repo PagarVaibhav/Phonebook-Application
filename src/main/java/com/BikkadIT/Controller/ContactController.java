@@ -93,7 +93,7 @@ public class ContactController {
 		boolean softDeleteById = this.contactService.softDeleteById(cId);
 		
 		if(softDeleteById) {
-			String msg="Contact Deleted Successfully";
+			String msg="Contact SoftDeletion Is Successfully";
 			return new ResponseEntity<String>(msg , HttpStatus.OK);
 		}
 		else {
